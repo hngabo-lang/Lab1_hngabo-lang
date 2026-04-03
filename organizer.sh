@@ -22,5 +22,3 @@ touch grades.csv
 echo "$time moved grades.csv to archive/$newfile" >> organizer.log
 
 echo "Done archiving."
-
-

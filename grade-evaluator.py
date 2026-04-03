@@ -1,5 +1,6 @@
 # Reads student grade data found in grades.csv, validates the data,calculates the final their GPA, decides pass or fail status, and suggest assignments allowd for resubmission.
 
+
 import csv
 import sys
 import os
@@ -19,15 +20,19 @@ def load_csv_data():
 
     try:
         with open(fl_name, mode='r') as file:
-            reader = csv.DictReader(file)
-
-  # Loop through every row and save it
-            for row in reader:
+            lines = file.readlines()     
+   # Loop through every row and save it
+            for line in lines[1:]:
+                parts = line.strip().split()
+                weight = parts[-1]
+                score = parts[-2]
+                group = parts[-3]
+                assignment = ' '.join(parts[:-3])
                 assignmts.append({
-                    'assignment': row['assignment'],
-                    'group': row['group'],
-                    'score': float(row['score']),
-                    'weight': float(row['weight'])
+                    'assignment': assignment,
+                    'group': group,
+                    'score': float(score),
+                    'weight': float(weight)
                 })
         return assignmts
     except Exception as e:
